@@ -126,9 +126,13 @@
 
     .address-line {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 6px;
       direction: ltr;
+    }
+
+    .address-line > span:first-child {
+      flex-shrink: 0;
     }
 
     .whatsapp-link {
