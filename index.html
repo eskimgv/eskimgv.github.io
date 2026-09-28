@@ -5,21 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>منتجاتنا</title>
   <style>
+    :root {
+      color-scheme: dark;
+      --page-bg: #191d1a;
+      --surface: #222824;
+      --surface-hover: #2b332d;
+      --text: #e1e5e0;
+      --text-muted: #a5aea6;
+      --border: #3a443c;
+      --accent: #91ad96;
+      --accent-strong: #718f77;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", sans-serif;
-      background-color: #fafafa;
-      color: #222;
+      background-color: var(--page-bg);
+      color: var(--text);
       line-height: 1.6;
       transition: direction 0.2s;
     }
 
     /* ===== Dil Değiştirme Butonu ===== */
-    <button data-dil="ar">🇸🇾 AR</button>
-    <button data-dil="tr">🇹🇷 TR</button>
-    <button data-dil="en">🇬🇧 EN</button>
-
     .dil-secici {
       position: absolute;
       top: 16px;
@@ -33,39 +41,46 @@
 
     .dil-secici button {
       background: transparent;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border);
       border-radius: 6px;
       padding: 4px 12px;
       font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
-      color: #555;
+      color: var(--text-muted);
       transition: all 0.2s;
       font-family: inherit;
     }
 
     .dil-secici button:hover {
-      border-color: #999;
-      color: #222;
+      background-color: var(--surface-hover);
+      border-color: var(--accent);
+      color: var(--text);
     }
 
     .dil-secici button.aktif {
-      background-color: #222;
-      color: #fff;
-      border-color: #222;
+      background-color: var(--accent-strong);
+      color: #f4f6f3;
+      border-color: var(--accent-strong);
+    }
+
+    .dil-secici button:focus-visible,
+    footer a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
     }
 
     /* ===== Başlık ===== */
     header {
       position: relative;
-      background-color: #fff;
+      background-color: var(--surface);
       padding: 24px 20px;
       text-align: center;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--border);
     }
 
     header h1 { font-size: 1.5rem; font-weight: 600; }
-    header p { font-size: 0.9rem; color: #888; margin-top: 4px; }
+    header p { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
 
     /* ===== Ürünler ===== */
     .urunler {
@@ -79,16 +94,16 @@
 
     .urun-karti {
       width: 100%;
-      background-color: #fff;
+      background-color: var(--surface);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
     }
 
     .urun-karti img { width: 100%; height: auto; display: block; }
     .urun-bilgi { padding: 16px; }
     .urun-bilgi h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
-    .urun-bilgi p { font-size: 0.88rem; color: #666; }
+    .urun-bilgi p { font-size: 0.88rem; color: var(--text-muted); }
 
     @media (min-width: 700px) {
       .urunler { flex-direction: row; flex-wrap: wrap; justify-content: center; max-width: 1000px; }
@@ -97,29 +112,36 @@
 
     /* ===== İletişim ===== */
     footer {
-      background-color: #fff;
-      border-top: 1px solid #eee;
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
       padding: 32px 20px;
       text-align: center;
       margin-top: 24px;
     }
 
     footer h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
-    footer p { font-size: 0.92rem; color: #555; margin-bottom: 8px; }
-    footer a { color: #222; text-decoration: none; font-weight: 500; }
-    footer a:hover { text-decoration: underline; }
+    footer p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 8px; }
+    footer a { color: var(--text); text-decoration: none; font-weight: 500; }
+    footer a:hover { color: var(--accent); text-decoration: underline; }
+
+    .address-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      direction: ltr;
+    }
 
     .whatsapp-link {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       direction: ltr;            /* RTL'de de soldan sağa */
-      color: #222;
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
     }
 
-    .whatsapp-icon { width: 22px; height: 22px; fill: #25D366; flex-shrink: 0; }
+    .whatsapp-icon { width: 22px; height: 22px; fill: #83ad8b; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -143,7 +165,11 @@
   <section class="urunler">
 
     <div class="urun-karti">
-      <img src="gorsel1.jpg" alt="Ürün 1">
+      <img src="gorsel1.jpg"
+           alt="المنتج ١"
+           data-ar-alt="المنتج ١"
+           data-tr-alt="Ürün 1"
+           data-en-alt="Product 1">
       <div class="urun-bilgi">
         <h2 data-ar="اسم المنتج ١" data-tr="Ürün Adı 1" data-en="Product Name 1">اسم المنتج ١</h2>
         <p data-ar="وصف مختصر لهذا المنتج."
@@ -155,7 +181,11 @@
     </div>
 
     <div class="urun-karti">
-      <img src="gorsel2.jpg" alt="Ürün 2">
+      <img src="gorsel2.jpg"
+           alt="المنتج ٢"
+           data-ar-alt="المنتج ٢"
+           data-tr-alt="Ürün 2"
+           data-en-alt="Product 2">
       <div class="urun-bilgi">
         <h2 data-ar="اسم المنتج ٢" data-tr="Ürün Adı 2" data-en="Product Name 2">اسم المنتج ٢</h2>
         <p data-ar="وصف مختصر لهذا المنتج."
@@ -167,7 +197,11 @@
     </div>
 
     <div class="urun-karti">
-      <img src="gorsel3.jpg" alt="Ürün 3">
+      <img src="gorsel3.jpg"
+           alt="المنتج ٣"
+           data-ar-alt="المنتج ٣"
+           data-tr-alt="Ürün 3"
+           data-en-alt="Product 3">
       <div class="urun-bilgi">
         <h2 data-ar="اسم المنتج ٣" data-tr="Ürün Adı 3" data-en="Product Name 3">اسم المنتج ٣</h2>
         <p data-ar="وصف مختصر لهذا المنتج."
@@ -186,15 +220,22 @@
 
     <p dir="ltr" style="text-align: center;">
       <a href="https://wa.me/905551234567" class="whatsapp-link">
-        <svg class="whatsapp-icon" ...>...</svg>
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 2a10 10 0 0 0-8.66 15l-1.3 4.74L6.9 20.5A10 10 0 1 0 12 2Z"/>
+          <path fill="#fff" d="M16.65 14.2c-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.57.13-.17.25-.65.81-.8.98-.15.17-.3.19-.55.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.39.11-.52.11-.11.25-.3.38-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.44-.06-.13-.57-1.37-.78-1.87-.2-.49-.41-.42-.57-.43h-.49c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1s.9 2.43 1.02 2.6c.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.48-.07 1.48-.61 1.69-1.2.21-.59.21-1.1.15-1.2-.06-.11-.23-.17-.48-.3Z"/>
+        </svg>
         <span>+90 555 123 45 67</span>
         </a>
     </p>
 
-    <p data-ar="📍 العنوان: حي النموذج، شارع النموذج رقم ١، إسطنبول"
-       data-tr="📍 Adres: Örnek Mahallesi, Örnek Sokak No:1, İstanbul"
-       data-en="📍 Address: Sample District, Sample Street No:1, Istanbul">
-      📍 العنوان: حي النموذج، شارع النموذج رقم ١، إسطنبول
+    <p class="address-line">
+      <span aria-hidden="true">📍</span>
+      <span class="address-text" dir="auto"
+            data-ar="العنوان: حي النموذج، شارع النموذج رقم ١، إسطنبول"
+            data-tr="Adres: Örnek Mahallesi, Örnek Sokak No:1, İstanbul"
+            data-en="Address: Sample District, Sample Street No:1, Istanbul">
+        العنوان: حي النموذج، شارع النموذج رقم ١، إسطنبول
+      </span>
     </p>
   </footer>
 
@@ -210,27 +251,52 @@
         en: 'Our Products'
       };
 
+      function diliOku() {
+        try {
+          return localStorage.getItem('dil');
+        } catch (hata) {
+          console.warn('Dil tercihi tarayıcı depolamasından okunamadı:', hata);
+          return null;
+        }
+      }
+
+      function diliKaydet(dil) {
+        try {
+          localStorage.setItem('dil', dil);
+        } catch (hata) {
+          console.warn('Dil tercihi tarayıcı depolamasına kaydedilemedi:', hata);
+        }
+      }
+
       function dilDegistir(dil) {
+        if (!Object.prototype.hasOwnProperty.call(basliklar, dil)) return;
+
         // 1. Tüm data-ar / data-tr / data-en özellikli elemanları güncelle
         document.querySelectorAll('[data-ar]').forEach(el => {
           const metin = el.getAttribute('data-' + dil);
           if (metin) el.textContent = metin;
         });
 
-        // 2. Aktif butonu işaretle
+        // 2. Görsellerin alternatif metinlerini güncelle
+        document.querySelectorAll('img[data-ar-alt]').forEach(img => {
+          const alternatifMetin = img.getAttribute('data-' + dil + '-alt');
+          if (alternatifMetin !== null) img.alt = alternatifMetin;
+        });
+
+        // 3. Aktif butonu işaretle
         butonlar.forEach(b => {
           b.classList.toggle('aktif', b.dataset.dil === dil);
         });
 
-        // 3. HTML lang ve dir özelliklerini güncelle (RTL/LTR)
+        // 4. HTML lang ve dir özelliklerini güncelle (RTL/LTR)
         document.documentElement.lang = dil;
         document.documentElement.dir = rtlDiller.includes(dil) ? 'rtl' : 'ltr';
 
-        // 4. Sayfa başlığını güncelle
+        // 5. Sayfa başlığını güncelle
         document.title = basliklar[dil] || basliklar[varsayilanDil];
 
-        // 5. Seçimi kaydet
-        localStorage.setItem('dil', dil);
+        // 6. Seçimi kaydet
+        diliKaydet(dil);
       }
 
       // Butonlara tıklama olayı ekle
@@ -239,8 +305,8 @@
       });
 
       // Sayfa açıldığında kayıtlı dili uygula
-      const kayitliDil = localStorage.getItem('dil') || varsayilanDil;
-      dilDegistir(kayitliDil);
+      const kayitliDil = diliOku();
+      dilDegistir(Object.prototype.hasOwnProperty.call(basliklar, kayitliDil) ? kayitliDil : varsayilanDil);
     })();
   </script>
 
