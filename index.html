@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürünlerimiz</title>
+  <style>
+    /* ===== Genel Ayarlar ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #fafafa;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* ===== Başlık (Header) ===== */
+    header {
+      background-color: #fff;
+      padding: 24px 20px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* ===== Ürün Kaydırma Alanı ===== */
+    .urunler {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding: 24px 20px;
+      -webkit-overflow-scrolling: touch; /* Mobilde akıcı kaydırma */
+      scrollbar-width: none; /* Firefox scrollbar gizle */
+    }
+
+    .urunler::-webkit-scrollbar {
+      display: none; /* Chrome/Safari scrollbar gizle */
+    }
+
+    .urun-karti {
+      flex-shrink: 0;
+      width: 260px;
+      scroll-snap-align: start;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .urun-karti img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .urun-bilgi {
+      padding: 16px;
+    }
+
+    .urun-bilgi h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .urun-bilgi p {
+      font-size: 0.88rem;
+      color: #666;
+    }
+
+    /* ===== İletişim Alanı ===== */
+    footer {
+      background-color: #fff;
+      border-top: 1px solid #eee;
+      padding: 32px 20px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    footer h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    footer p {
+      font-size: 0.92rem;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    footer a {
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Mobil Uyum ===== */
+    @media (max-width: 480px) {
+      .urun-karti {
+        width: 220px;
+      }
+
+      .urun-karti img {
+        height: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Başlık -->
+  <header>
+    <h1>Firma Adınız</h1>
+    <p>Kaliteli ürünler, güvenilir hizmet</p>
+  </header>
+
+  <!-- Ürünler (yatay kaydırmalı) -->
+  <section class="urunler">
+
+    <div class="urun-karti">
+      <img src="gorsel1.jpg" alt="Ürün 1">
+      <div class="urun-bilgi">
+        <h2>Ürün Adı 1</h2>
+        <p>Bu ürünün kısa açıklaması buraya gelecek. Bir iki cümle yeterli.</p>
+      </div>
+    </div>
+
+    <div class="urun-karti">
+      <img src="gorsel2.jpg" alt="Ürün 2">
+      <div class="urun-bilgi">
+        <h2>Ürün Adı 2</h2>
+        <p>Bu ürünün kısa açıklaması buraya gelecek. Bir iki cümle yeterli.</p>
+      </div>
+    </div>
+
+    <div class="urun-karti">
+      <img src="gorsel3.jpg" alt="Ürün 3">
+      <div class="urun-bilgi">
+        <h2>Ürün Adı 3</h2>
+        <p>Bu ürünün kısa açıklaması buraya gelecek. Bir iki cümle yeterli.</p>
+      </div>
+    </div>
+
+    <div class="urun-karti">
+      <img src="gorsel4.jpg" alt="Ürün 4">
+      <div class="urun-bilgi">
+        <h2>Ürün Adı 4</h2>
+        <p>Bu ürünün kısa açıklaması buraya gelecek. Bir iki cümle yeterli.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- İletişim -->
+  <footer>
+    <h3>İletişim</h3>
+    <p>📞 Telefon: <a href="tel:+905551234567">+90 555 123 45 67</a></p>
+    <p>📍 Adres: Örnek Mahallesi, Örnek Sokak No:1, İstanbul</p>
+  </footer>
+
+</body>
+</html>
