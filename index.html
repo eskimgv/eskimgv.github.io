@@ -1,45 +1,67 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ürünlerimiz</title>
+  <title>منتجاتنا</title>
   <style>
-    /* ===== Genel Ayarlar ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", sans-serif;
       background-color: #fafafa;
       color: #222;
       line-height: 1.6;
+      transition: direction 0.2s;
     }
 
-    /* ===== Başlık (Header) ===== */
+    /* ===== Dil Değiştirme Butonu ===== */
+    .dil-secici {
+      position: absolute;
+      top: 16px;
+      inset-inline-end: 16px;    /* RTL/LTR uyumlu sağ/sol */
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .dil-secici button {
+      background: transparent;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #555;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .dil-secici button:hover {
+      border-color: #999;
+      color: #222;
+    }
+
+    .dil-secici button.aktif {
+      background-color: #222;
+      color: #fff;
+      border-color: #222;
+    }
+
+    /* ===== Başlık ===== */
     header {
+      position: relative;
       background-color: #fff;
       padding: 24px 20px;
       text-align: center;
       border-bottom: 1px solid #eee;
     }
 
-    header h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
+    header h1 { font-size: 1.5rem; font-weight: 600; }
+    header p { font-size: 0.9rem; color: #888; margin-top: 4px; }
 
-    header p {
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 4px;
-    }
-
-    /* ===== Ürünler: Mobilde dikey akış ===== */
+    /* ===== Ürünler ===== */
     .urunler {
       display: flex;
       flex-direction: column;
@@ -57,42 +79,17 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
 
-    .urun-karti img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .urun-karti img { width: 100%; height: auto; display: block; }
+    .urun-bilgi { padding: 16px; }
+    .urun-bilgi h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+    .urun-bilgi p { font-size: 0.88rem; color: #666; }
 
-    .urun-bilgi {
-      padding: 16px;
-    }
-
-    .urun-bilgi h2 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .urun-bilgi p {
-      font-size: 0.88rem;
-      color: #666;
-    }
-
-    /* ===== Masaüstünde yan yana ===== */
     @media (min-width: 700px) {
-      .urunler {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        max-width: 1000px;
-      }
-
-      .urun-karti {
-        width: 300px;
-      }
+      .urunler { flex-direction: row; flex-wrap: wrap; justify-content: center; max-width: 1000px; }
+      .urun-karti { width: 300px; }
     }
 
-    /* ===== İletişim Alanı ===== */
+    /* ===== İletişim ===== */
     footer {
       background-color: #fff;
       border-top: 1px solid #eee;
@@ -101,92 +98,76 @@
       margin-top: 24px;
     }
 
-    footer h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
+    footer h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+    footer p { font-size: 0.92rem; color: #555; margin-bottom: 8px; }
+    footer a { color: #222; text-decoration: none; font-weight: 500; }
+    footer a:hover { text-decoration: underline; }
 
-    footer p {
-      font-size: 0.92rem;
-      color: #555;
-      margin-bottom: 8px;
-    }
-
-    footer a {
+    .whatsapp-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       color: #222;
       text-decoration: none;
       font-weight: 500;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* WhatsApp bağlantısı */
-.whatsapp-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #222;              /* WhatsApp yazı rengi */
-  font-weight: 500;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.whatsapp-link:hover {
-  opacity: 0.8;
-  text-decoration: none;
-}
-
-.whatsapp-icon {
-  width: 22px;
-  height: 22px;
-  fill: #25D366;               /* İkon rengi */
-  flex-shrink: 0;
-}
+    .whatsapp-icon { width: 22px; height: 22px; fill: #25D366; flex-shrink: 0; }
   </style>
 </head>
 <body>
 
-  <!-- Başlık -->
+  <!-- Başlık ve Dil Seçici -->
   <header>
-    <h1>Firma Adınız</h1>
-    <p>Kaliteli ürünler, güvenilir hizmet</p>
+    <div class="dil-secici">
+      <button data-dil="ar" class="aktif">AR</button>
+      <button data-dil="tr">TR</button>
+      <button data-dil="en">EN</button>
+    </div>
+    <h1 data-ar="اسم شركتك" data-tr="Firma Adınız" data-en="Your Company">اسم شركتك</h1>
+    <p data-ar="منتجات عالية الجودة، خدمة موثوقة"
+       data-tr="Kaliteli ürünler, güvenilir hizmet"
+       data-en="Quality products, reliable service">
+      منتجات عالية الجودة، خدمة موثوقة
+    </p>
   </header>
 
   <!-- Ürünler -->
   <section class="urunler">
 
     <div class="urun-karti">
-      <img src="un.png" alt="Ürün 1">
+      <img src="gorsel1.jpg" alt="Ürün 1">
       <div class="urun-bilgi">
-        <h2>Un</h2>
-        <p>Toptan un tedariği yapabiliyoruz.</p>
+        <h2 data-ar="اسم المنتج ١" data-tr="Ürün Adı 1" data-en="Product Name 1">اسم المنتج ١</h2>
+        <p data-ar="وصف مختصر لهذا المنتج."
+           data-tr="Bu ürünün kısa açıklaması."
+           data-en="Short description of this product.">
+          وصف مختصر لهذا المنتج.
+        </p>
       </div>
     </div>
 
     <div class="urun-karti">
-      <img src="sampuan.png" alt="Ürün 2">
+      <img src="gorsel2.jpg" alt="Ürün 2">
       <div class="urun-bilgi">
-        <h2>Şampuan</h2>
-        <p>Toptan şampuan tedariği yapabiliyoruz.</p>
+        <h2 data-ar="اسم المنتج ٢" data-tr="Ürün Adı 2" data-en="Product Name 2">اسم المنتج ٢</h2>
+        <p data-ar="وصف مختصر لهذا المنتج."
+           data-tr="Bu ürünün kısa açıklaması."
+           data-en="Short description of this product.">
+          وصف مختصر لهذا المنتج.
+        </p>
       </div>
     </div>
 
     <div class="urun-karti">
       <img src="gorsel3.jpg" alt="Ürün 3">
       <div class="urun-bilgi">
-        <h2>Ürün Adı 3</h2>
-        <p>Bu ürünün kısa açıklaması buraya gelecek. Bir iki cümle yeterli.</p>
-      </div>
-    </div>
-
-    <div class="urun-karti">
-      <img src="gorsel4.jpg" alt="Ürün 4">
-      <div class="urun-bilgi">
-        <h2>Ürün Adı 4</h2>
-        <p>Bu ürünün kısa açıklaması buraya gelecek. Bir iki cümle yeterli.</p>
+        <h2 data-ar="اسم المنتج ٣" data-tr="Ürün Adı 3" data-en="Product Name 3">اسم المنتج ٣</h2>
+        <p data-ar="وصف مختصر لهذا المنتج."
+           data-tr="Bu ürünün kısa açıklaması."
+           data-en="Short description of this product.">
+          وصف مختصر لهذا المنتج.
+        </p>
       </div>
     </div>
 
@@ -194,19 +175,69 @@
 
   <!-- İletişim -->
   <footer>
-  <h3>İletişim</h3>
+    <h3 data-ar="اتصل بنا" data-tr="İletişim" data-en="Contact">اتصل بنا</h3>
 
-  <p>
-    <a href="https://wa.me/905551234567" class="whatsapp-link">
-      <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      <span>+90 555 123 45 67</span>
-    </a>
-  </p>
+    <p>
+      <a href="https://wa.me/905551234567" class="whatsapp-link">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span>+90 555 123 45 67</span>
+      </a>
+    </p>
 
-  <p>?? Adres: Örnek Mahallesi, Örnek Sokak No:1, İstanbul</p>
-</footer>
+    <p data-ar="📍 العنوان: حي النموذج، شارع النموذج رقم ١، إسطنبول"
+       data-tr="📍 Adres: Örnek Mahallesi, Örnek Sokak No:1, İstanbul"
+       data-en="📍 Address: Sample District, Sample Street No:1, Istanbul">
+      📍 العنوان: حي النموذج، شارع النموذج رقم ١، إسطنبول
+    </p>
+  </footer>
+
+  <!-- Dil Değiştirme Mantığı -->
+  <script>
+    (function() {
+      const varsayilanDil = 'ar';
+      const rtlDiller = ['ar', 'he', 'fa', 'ur'];  // Sağdan sola diller
+      const butonlar = document.querySelectorAll('.dil-secici button');
+      const basliklar = {
+        ar: 'منتجاتنا',
+        tr: 'Ürünlerimiz',
+        en: 'Our Products'
+      };
+
+      function dilDegistir(dil) {
+        // 1. Tüm data-ar / data-tr / data-en özellikli elemanları güncelle
+        document.querySelectorAll('[data-ar]').forEach(el => {
+          const metin = el.getAttribute('data-' + dil);
+          if (metin) el.textContent = metin;
+        });
+
+        // 2. Aktif butonu işaretle
+        butonlar.forEach(b => {
+          b.classList.toggle('aktif', b.dataset.dil === dil);
+        });
+
+        // 3. HTML lang ve dir özelliklerini güncelle (RTL/LTR)
+        document.documentElement.lang = dil;
+        document.documentElement.dir = rtlDiller.includes(dil) ? 'rtl' : 'ltr';
+
+        // 4. Sayfa başlığını güncelle
+        document.title = basliklar[dil] || basliklar[varsayilanDil];
+
+        // 5. Seçimi kaydet
+        localStorage.setItem('dil', dil);
+      }
+
+      // Butonlara tıklama olayı ekle
+      butonlar.forEach(btn => {
+        btn.addEventListener('click', () => dilDegistir(btn.dataset.dil));
+      });
+
+      // Sayfa açıldığında kayıtlı dili uygula
+      const kayitliDil = localStorage.getItem('dil') || varsayilanDil;
+      dilDegistir(kayitliDil);
+    })();
+  </script>
 
 </body>
 </html>
