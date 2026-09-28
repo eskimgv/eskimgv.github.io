@@ -39,25 +39,18 @@
       margin-top: 4px;
     }
 
-    /* ===== Ürün Kaydırma Alanı ===== */
+    /* ===== Ürünler: Mobilde dikey akış ===== */
     .urunler {
       display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 16px;
-      padding: 24px 20px;
-      -webkit-overflow-scrolling: touch; /* Mobilde akıcı kaydırma */
-      scrollbar-width: none; /* Firefox scrollbar gizle */
-    }
-
-    .urunler::-webkit-scrollbar {
-      display: none; /* Chrome/Safari scrollbar gizle */
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 16px;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .urun-karti {
-      flex-shrink: 0;
-      width: 260px;
-      scroll-snap-align: start;
+      width: 100%;
       background-color: #fff;
       border-radius: 12px;
       overflow: hidden;
@@ -66,8 +59,7 @@
 
     .urun-karti img {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
 
@@ -84,6 +76,20 @@
     .urun-bilgi p {
       font-size: 0.88rem;
       color: #666;
+    }
+
+    /* ===== Masaüstünde yan yana ===== */
+    @media (min-width: 700px) {
+      .urunler {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 1000px;
+      }
+
+      .urun-karti {
+        width: 300px;
+      }
     }
 
     /* ===== İletişim Alanı ===== */
@@ -116,17 +122,6 @@
     footer a:hover {
       text-decoration: underline;
     }
-
-    /* ===== Mobil Uyum ===== */
-    @media (max-width: 480px) {
-      .urun-karti {
-        width: 220px;
-      }
-
-      .urun-karti img {
-        height: 170px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -137,7 +132,7 @@
     <p>Kaliteli ürünler, güvenilir hizmet</p>
   </header>
 
-  <!-- Ürünler (yatay kaydırmalı) -->
+  <!-- Ürünler -->
   <section class="urunler">
 
     <div class="urun-karti">
