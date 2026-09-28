@@ -43,8 +43,11 @@
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 4px 12px;
-      font-size: 0.85rem;
+      min-width: 36px;
+      height: 34px;
+      padding: 4px 8px;
+      font-size: 1rem;
+      line-height: 1;
       font-weight: 500;
       cursor: pointer;
       color: var(--text-muted);
@@ -81,6 +84,17 @@
 
     header h1 { font-size: 1.5rem; font-weight: 600; }
     header p { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
+
+    @media (max-width: 600px) {
+      header { padding: 58px 16px 20px; }
+      .dil-secici { top: 10px; right: 10px; gap: 4px; }
+      .dil-secici button {
+        min-width: 34px;
+        height: 32px;
+        padding: 3px 6px;
+        font-size: 1.1rem;
+      }
+    }
 
     /* ===== Ürünler ===== */
     .urunler {
@@ -153,9 +167,9 @@
   <!-- Başlık ve Dil Seçici -->
   <header>
     <div class="dil-secici">
-      <button data-dil="ar" class="aktif">AR</button>
-      <button data-dil="tr">TR</button>
-      <button data-dil="en">EN</button>
+      <button type="button" data-dil="ar" class="aktif" aria-label="العربية">🇸🇾</button>
+      <button type="button" data-dil="tr" aria-label="Türkçe">🇹🇷</button>
+      <button type="button" data-dil="en" aria-label="English">🇬🇧</button>
     </div>
     <h1 data-ar="اسم شركتك" data-tr="Firma Adınız" data-en="Your Company">اسم شركتك</h1>
     <p data-ar="منتجات عالية الجودة، خدمة موثوقة"
