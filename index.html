@@ -104,6 +104,7 @@
       padding: 20px 16px;
       max-width: 600px;
       margin: 0 auto;
+      direction: ltr;
     }
 
     .urun-karti {
@@ -114,8 +115,100 @@
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
     }
 
-    .urun-karti img { width: 100%; height: auto; display: block; }
+    .urun-galeri { position: relative; }
+
+    .galeri-kaydirma {
+      display: flex;
+      direction: ltr;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .galeri-kaydirma::-webkit-scrollbar { display: none; }
+
+    .galeri-kare {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+    }
+
+    .galeri-kare img { width: 100%; height: auto; display: block; }
+
+    .galeri-kontroller[hidden] { display: none; }
+
+    .galeri-kontroller {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      pointer-events: none;
+    }
+
+    .galeri-ok {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(25, 29, 26, 0.78);
+      color: var(--text);
+      font: inherit;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .galeri-ok:focus-visible,
+    .galeri-nokta:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .galeri-gosterge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(25, 29, 26, 0.78);
+      color: var(--text);
+      font-size: 0.75rem;
+      direction: ltr;
+    }
+
+    .galeri-noktalar {
+      position: absolute;
+      right: 0;
+      bottom: 10px;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      pointer-events: none;
+    }
+
+    .galeri-nokta {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(225, 229, 224, 0.55);
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .galeri-nokta[aria-current="true"] { background: #fff; }
+
     .urun-bilgi { padding: 16px; }
+    html[dir="rtl"] .urun-bilgi { direction: rtl; }
+    html[dir="ltr"] .urun-bilgi { direction: ltr; }
     .urun-bilgi h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
     .urun-bilgi p { font-size: 0.88rem; color: var(--text-muted); }
 
@@ -183,35 +276,94 @@
   <section class="urunler">
 
     <div class="urun-karti">
-      <img src="un.png"
-           alt="دقيق"
-           data-ar-alt="دقيق"
-           data-tr-alt="Un"
-           data-en-alt="Flour">
+      <div class="urun-galeri">
+        <div class="galeri-kaydirma" role="group" aria-roledescription="carousel" aria-label="الدقيق">
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="un.png"
+                 alt="دقيق"
+                 data-ar-alt="دقيق"
+                 data-tr-alt="Un"
+                 data-en-alt="Flour">
+          </div>
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="un-2.webp"
+                 alt="دقيق"
+                 data-ar-alt="دقيق"
+                 data-tr-alt="Un"
+                 data-en-alt="Flour">
+          </div>
+        </div>
+        <div class="galeri-kontroller" hidden></div>
+      </div>
       <div class="urun-bilgi">
         <h2 data-ar="الدقيق" data-tr="Un" data-en="Flour">الدقيق</h2>
+        <p data-ar="يُضاف وصف المنتج هنا" data-tr="Ürün açıklaması buraya eklenecek." data-en="Product description goes here.">يُضاف وصف المنتج هنا</p>
       </div>
     </div>
 
     <div class="urun-karti">
-      <img src="nohut.png"
-           alt="حمص"
-           data-ar-alt="حمص"
-           data-tr-alt="Nohut"
-           data-en-alt="Chickpeas">
+      <div class="urun-galeri">
+        <div class="galeri-kaydirma" role="group" aria-roledescription="carousel" aria-label="معطف">
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="mont-1.jpg"
+                 alt="معطف"
+                 data-ar-alt="معطف"
+                 data-tr-alt="Mont"
+                 data-en-alt="Coat">
+          </div>
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="mont-2.jpg"
+                 alt="معطف"
+                 data-ar-alt="معطف"
+                 data-tr-alt="Mont"
+                 data-en-alt="Coat">
+          </div>
+        </div>
+        <div class="galeri-kontroller" hidden></div>
+      </div>
       <div class="urun-bilgi">
-        <h2 data-ar="الحمص" data-tr="Nohut" data-en="Chickpeas">الحمص</h2>
+        <h2 data-ar="معطف" data-tr="Mont" data-en="Coat">معطف</h2>
+        <p data-ar="بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة." data-tr="Doğrudan üreticiden, toptan ürün temin edebiliyoruz." data-en="We can source products wholesale directly from the manufacturer.">بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة.</p>
       </div>
     </div>
 
     <div class="urun-karti">
-      <img src="pirinc.png"
-           alt="أرز"
-           data-ar-alt="أرز"
-           data-tr-alt="Pirinç"
-           data-en-alt="Rice">
+      <div class="urun-galeri">
+        <div class="galeri-kaydirma" role="group" aria-roledescription="carousel" aria-label="إسفنجة">
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="sunger-1.webp"
+                 alt="إسفنجة"
+                 data-ar-alt="إسفنجة"
+                 data-tr-alt="Sünger"
+                 data-en-alt="Sponge">
+          </div>
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="sunger-2.jpg"
+                 alt="إسفنجة"
+                 data-ar-alt="إسفنجة"
+                 data-tr-alt="Sünger"
+                 data-en-alt="Sponge">
+          </div>
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="sunger-3.webp"
+                 alt="إسفنجة"
+                 data-ar-alt="إسفنجة"
+                 data-tr-alt="Sünger"
+                 data-en-alt="Sponge">
+          </div>
+          <div class="galeri-kare" role="group" aria-roledescription="slide">
+            <img src="sunger-4.jpg"
+                 alt="إسفنجة"
+                 data-ar-alt="إسفنجة"
+                 data-tr-alt="Sünger"
+                 data-en-alt="Sponge">
+          </div>
+        </div>
+        <div class="galeri-kontroller" hidden></div>
+      </div>
       <div class="urun-bilgi">
-        <h2 data-ar="الأرز" data-tr="Pirinç" data-en="Rice">الأرز</h2>
+        <h2 data-ar="إسفنجة" data-tr="Sünger" data-en="Sponge">إسفنجة</h2>
+        <p data-ar="بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة." data-tr="Doğrudan üreticiden, toptan ürün temin edebiliyoruz." data-en="We can source products wholesale directly from the manufacturer.">بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة.</p>
       </div>
     </div>
 
@@ -248,6 +400,12 @@
       const varsayilanDil = 'ar';
       const rtlDiller = ['ar', 'he', 'fa', 'ur'];  // Sağdan sola diller
       const butonlar = document.querySelectorAll('.dil-secici button');
+      const galeriler = document.querySelectorAll('.galeri-kaydirma');
+      const galeriEtiketleri = {
+        ar: { carousel: 'معرض الصور', slide: 'الصورة', previous: 'الصورة السابقة', next: 'الصورة التالية' },
+        tr: { carousel: 'Görsel galerisi', slide: 'Görsel', previous: 'Önceki görsel', next: 'Sonraki görsel' },
+        en: { carousel: 'Image gallery', slide: 'Image', previous: 'Previous image', next: 'Next image' }
+      };
       const basliklar = {
         ar: 'منتجاتنا',
         tr: 'Ürünlerimiz',
@@ -286,6 +444,25 @@
           if (alternatifMetin !== null) img.alt = alternatifMetin;
         });
 
+        galeriler.forEach(galeri => {
+          const kart = galeri.closest('.urun-karti');
+          const kontroller = galeri.nextElementSibling;
+          const urunAdi = kart.querySelector('.urun-bilgi h2').textContent;
+          galeri.setAttribute('aria-label', `${galeriEtiketleri[dil].carousel}: ${urunAdi}`);
+          galeri.querySelectorAll('.galeri-kare').forEach((kare, index) => {
+            kare.setAttribute('aria-label', `${galeriEtiketleri[dil].slide} ${index + 1} / ${galeri.children.length}`);
+          });
+          kontroller.querySelectorAll('.galeri-onceki').forEach(btn => {
+            btn.setAttribute('aria-label', galeriEtiketleri[dil].previous);
+          });
+          kontroller.querySelectorAll('.galeri-sonraki').forEach(btn => {
+            btn.setAttribute('aria-label', galeriEtiketleri[dil].next);
+          });
+          kontroller.querySelectorAll('.galeri-nokta').forEach((btn, index) => {
+            btn.setAttribute('aria-label', `${galeriEtiketleri[dil].slide} ${index + 1} / ${galeri.children.length}`);
+          });
+        });
+
         // 3. Aktif butonu işaretle
         butonlar.forEach(b => {
           b.classList.toggle('aktif', b.dataset.dil === dil);
@@ -305,6 +482,67 @@
       // Butonlara tıklama olayı ekle
       butonlar.forEach(btn => {
         btn.addEventListener('click', () => dilDegistir(btn.dataset.dil));
+      });
+
+      galeriler.forEach(galeri => {
+        const kareler = Array.from(galeri.querySelectorAll('.galeri-kare'));
+        const kontroller = galeri.nextElementSibling;
+        if (kareler.length < 2) return;
+
+        kontroller.hidden = false;
+        const noktalar = document.createElement('div');
+        noktalar.className = 'galeri-noktalar';
+        const gosterge = document.createElement('span');
+        gosterge.className = 'galeri-gosterge';
+        gosterge.setAttribute('aria-hidden', 'true');
+        const onceki = document.createElement('button');
+        onceki.type = 'button';
+        onceki.className = 'galeri-ok galeri-onceki';
+        onceki.textContent = '‹';
+        const sonraki = document.createElement('button');
+        sonraki.type = 'button';
+        sonraki.className = 'galeri-ok galeri-sonraki';
+        sonraki.textContent = '›';
+        kontroller.append(onceki, sonraki, gosterge, noktalar);
+
+        kareler.forEach((kare, index) => {
+          const nokta = document.createElement('button');
+          nokta.type = 'button';
+          nokta.className = 'galeri-nokta';
+          nokta.setAttribute('aria-current', String(index === 0));
+          nokta.addEventListener('click', () => {
+            galeri.scrollTo({ left: index * galeri.clientWidth, behavior: 'smooth' });
+          });
+          noktalar.append(nokta);
+        });
+
+        function gostergeyiGuncelle() {
+          const aktifKare = Math.min(
+            kareler.length - 1,
+            Math.round(galeri.scrollLeft / galeri.clientWidth)
+          );
+          gosterge.textContent = `${aktifKare + 1} / ${kareler.length}`;
+          Array.from(noktalar.children).forEach((nokta, index) => {
+            nokta.setAttribute('aria-current', String(index === aktifKare));
+          });
+        }
+
+        onceki.addEventListener('click', () => {
+          const aktifKare = Math.round(galeri.scrollLeft / galeri.clientWidth);
+          galeri.scrollTo({
+            left: Math.max(0, aktifKare - 1) * galeri.clientWidth,
+            behavior: 'smooth'
+          });
+        });
+        sonraki.addEventListener('click', () => {
+          const aktifKare = Math.round(galeri.scrollLeft / galeri.clientWidth);
+          galeri.scrollTo({
+            left: Math.min(kareler.length - 1, aktifKare + 1) * galeri.clientWidth,
+            behavior: 'smooth'
+          });
+        });
+        galeri.addEventListener('scroll', gostergeyiGuncelle, { passive: true });
+        gostergeyiGuncelle();
       });
 
       // Sayfa açıldığında kayıtlı dili uygula
