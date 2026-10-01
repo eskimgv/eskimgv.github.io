@@ -128,12 +128,17 @@
       gap: 10px;
       overflow-x: auto;
       padding: 2px 2px 14px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
+
+    .kategori-filtreleri::-webkit-scrollbar { display: none; }
 
     .kategori-filtre {
       flex: 0 0 auto;
+      scroll-snap-align: start;
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 9px 16px;
@@ -207,15 +212,21 @@
     }
 
     @media (max-width: 650px) {
-      .katalog { padding: 36px 16px 48px; }
-      .katalog-baslik { align-items: flex-start; flex-direction: column; gap: 14px; }
-      .urunler { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .katalog { padding: 30px 16px 44px; }
+      .katalog-baslik { align-items: flex-start; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+      .katalog-baslik h2 { font-size: clamp(1.55rem, 7vw, 1.9rem); }
+      .katalog-baslik p { margin-top: 7px; font-size: 0.94rem; }
+      .urun-sayisi { padding: 6px 12px; }
+      .kategori-filtreleri { gap: 8px; padding-bottom: 8px; }
+      .kategori-filtre { padding: 8px 13px; }
+      .urunler { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
       .urun-karti { min-height: 240px; padding: 8px; }
       .urun-bilgi { padding: 12px 8px 8px; }
     }
 
     @media (max-width: 380px) {
       .urunler { grid-template-columns: 1fr; }
+      .urun-karti { min-height: 0; }
     }
 
     /* ===== İletişim ===== */
