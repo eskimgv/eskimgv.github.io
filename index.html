@@ -96,125 +96,126 @@
       }
     }
 
-    /* ===== Ürünler ===== */
-    .urunler {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding: 20px 16px;
-      max-width: 600px;
+    /* ===== Ürün kataloğu ===== */
+    .katalog {
+      max-width: 1200px;
       margin: 0 auto;
-      direction: ltr;
+      padding: 52px 24px 64px;
     }
 
-    .urun-karti {
-      width: 100%;
-      background-color: var(--surface);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
-    }
-
-    .urun-galeri { position: relative; }
-
-    .galeri-kaydirma {
+    .katalog-baslik {
       display: flex;
-      direction: ltr;
-      overflow-x: auto;
-      overscroll-behavior-inline: contain;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .galeri-kaydirma::-webkit-scrollbar { display: none; }
-
-    .galeri-kare {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-    }
-
-    .galeri-kare img { width: 100%; height: auto; display: block; }
-
-    .galeri-kontroller[hidden] { display: none; }
-
-    .galeri-kontroller {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      padding: 0 10px;
-      pointer-events: none;
+      gap: 24px;
+      margin-bottom: 28px;
     }
 
-    .galeri-ok {
-      display: grid;
-      place-items: center;
-      width: 34px;
-      height: 34px;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(25, 29, 26, 0.78);
-      color: var(--text);
+    .katalog-baslik h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; }
+    .katalog-baslik p { max-width: 520px; margin-top: 10px; color: var(--text-muted); }
+
+    .urun-sayisi {
+      flex: 0 0 auto;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .kategori-filtreleri {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 2px 2px 14px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .kategori-filtre {
+      flex: 0 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 9px 16px;
+      background: var(--surface);
+      color: var(--text-muted);
       font: inherit;
-      font-size: 1.5rem;
-      line-height: 1;
+      font-size: 0.88rem;
       cursor: pointer;
-      pointer-events: auto;
+      transition: color 0.2s, background-color 0.2s, border-color 0.2s;
     }
 
-    .galeri-ok:focus-visible,
-    .galeri-nokta:focus-visible {
+    .kategori-filtre:hover,
+    .kategori-filtre.aktif {
+      color: #f4f6f3;
+      background: var(--accent-strong);
+      border-color: var(--accent-strong);
+    }
+
+    .kategori-filtre:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
     }
 
-    .galeri-gosterge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      padding: 2px 8px;
-      border-radius: 12px;
-      background: rgba(25, 29, 26, 0.78);
-      color: var(--text);
-      font-size: 0.75rem;
+    .urunler {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
       direction: ltr;
+      margin-top: 18px;
     }
 
-    .galeri-noktalar {
-      position: absolute;
-      right: 0;
-      bottom: 10px;
-      left: 0;
+    .urun-karti {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
       display: flex;
-      justify-content: center;
-      gap: 6px;
-      pointer-events: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      transition: transform 0.2s, border-color 0.2s;
     }
 
-    .galeri-nokta {
-      width: 7px;
-      height: 7px;
-      padding: 0;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(225, 229, 224, 0.55);
-      cursor: pointer;
-      pointer-events: auto;
+    .urun-karti:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
     }
 
-    .galeri-nokta[aria-current="true"] { background: #fff; }
+    .urun-karti[hidden] { display: none; }
+    .urun-isaret { color: var(--accent); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em; }
+    .urun-gorsel {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.2;
+      border-radius: 9px;
+      background: #f4f4f1;
+      object-fit: contain;
+    }
 
-    .urun-bilgi { padding: 16px; }
-    html[dir="rtl"] .urun-bilgi { direction: rtl; }
+    .urun-bilgi { direction: rtl; padding: 14px 10px 10px; }
     html[dir="ltr"] .urun-bilgi { direction: ltr; }
-    .urun-bilgi h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
-    .urun-bilgi p { font-size: 0.88rem; color: var(--text-muted); }
+    .urun-bilgi h3 { font-size: 1.05rem; font-weight: 600; }
+    .urun-kategori-etiket { display: inline-block; margin-top: 8px; color: var(--text-muted); font-size: 0.78rem; }
+    
 
-    @media (min-width: 700px) {
-      .urunler { flex-direction: row; flex-wrap: wrap; justify-content: center; max-width: 1000px; }
-      .urun-karti { width: 300px; }
+    @media (max-width: 900px) {
+      .urunler { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 650px) {
+      .katalog { padding: 36px 16px 48px; }
+      .katalog-baslik { align-items: flex-start; flex-direction: column; gap: 14px; }
+      .urunler { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .urun-karti { min-height: 240px; padding: 8px; }
+      .urun-bilgi { padding: 12px 8px 8px; }
+    }
+
+    @media (max-width: 380px) {
+      .urunler { grid-template-columns: 1fr; }
     }
 
     /* ===== İletişim ===== */
@@ -264,7 +265,7 @@
       <button type="button" data-dil="tr" aria-label="Türkçe">🇹🇷</button>
       <button type="button" data-dil="en" aria-label="English">🇬🇧</button>
     </div>
-    <h1 data-ar="اسم شركتك" data-tr="Firma Adınız" data-en="Your Company">اسم شركتك</h1>
+    <h1 data-ar="Wafa Sham" data-tr="Wafa Sham" data-en="Wafa Sham">Wafa Sham</h1>
     <p data-ar="منتجات عالية الجودة، خدمة موثوقة"
        data-tr="Kaliteli ürünler, güvenilir hizmet"
        data-en="Quality products, reliable service">
@@ -272,101 +273,34 @@
     </p>
   </header>
 
-  <!-- Ürünler -->
-  <section class="urunler">
-
-    <div class="urun-karti">
-      <div class="urun-galeri">
-        <div class="galeri-kaydirma" role="group" aria-roledescription="carousel" aria-label="الدقيق">
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="un.png"
-                 alt="دقيق"
-                 data-ar-alt="دقيق"
-                 data-tr-alt="Un"
-                 data-en-alt="Flour">
-          </div>
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="un-2.webp"
-                 alt="دقيق"
-                 data-ar-alt="دقيق"
-                 data-tr-alt="Un"
-                 data-en-alt="Flour">
-          </div>
-        </div>
-        <div class="galeri-kontroller" hidden></div>
+  <section class="katalog" aria-labelledby="katalog-baslik">
+    <div class="katalog-baslik">
+      <div>
+        <h2 id="katalog-baslik" data-ar="مجموعات منتجاتنا" data-tr="Ürün Gruplarımız" data-en="Our Product Range">مجموعات منتجاتنا</h2>
+        <p data-ar="استكشف مجموعات المنتجات واختر الفئة المناسبة لاحتياجك." data-tr="Ürün gruplarını keşfedin, ihtiyacınıza uygun kategoriyi seçin." data-en="Explore our product range and choose a category for your needs.">استكشف مجموعات المنتجات واختر الفئة المناسبة لاحتياجك.</p>
       </div>
-      <div class="urun-bilgi">
-        <h2 data-ar="الدقيق" data-tr="Un" data-en="Flour">الدقيق</h2>
-        <p data-ar="يُضاف وصف المنتج هنا" data-tr="Ürün açıklaması buraya eklenecek." data-en="Product description goes here.">يُضاف وصف المنتج هنا</p>
-      </div>
+      <p class="urun-sayisi" id="urun-sayisi" aria-live="polite"></p>
     </div>
 
-    <div class="urun-karti">
-      <div class="urun-galeri">
-        <div class="galeri-kaydirma" role="group" aria-roledescription="carousel" aria-label="معطف">
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="mont-1.jpg"
-                 alt="معطف"
-                 data-ar-alt="معطف"
-                 data-tr-alt="Mont"
-                 data-en-alt="Coat">
-          </div>
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="mont-2.jpg"
-                 alt="معطف"
-                 data-ar-alt="معطف"
-                 data-tr-alt="Mont"
-                 data-en-alt="Coat">
-          </div>
-        </div>
-        <div class="galeri-kontroller" hidden></div>
-      </div>
-      <div class="urun-bilgi">
-        <h2 data-ar="معطف" data-tr="Mont" data-en="Coat">معطف</h2>
-        <p data-ar="بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة." data-tr="Doğrudan üreticiden, toptan ürün temin edebiliyoruz." data-en="We can source products wholesale directly from the manufacturer.">بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة.</p>
-      </div>
-    </div>
+    <nav class="kategori-filtreleri" id="kategori-filtreleri" aria-label="فئات المنتجات">
+      <button class="kategori-filtre aktif" type="button" data-kategori="all"
+              data-ar="الكل" data-tr="Tümü" data-en="All" aria-pressed="true">الكل</button>
+      <button class="kategori-filtre" type="button" data-kategori="standart"
+              data-ar="المنتجات القياسية" data-tr="Standart Ürünler" data-en="Standard Products" aria-pressed="false">المنتجات القياسية</button>
+      <button class="kategori-filtre" type="button" data-kategori="konfor"
+              data-ar="الراحة" data-tr="Konfor" data-en="Comfort" aria-pressed="false">الراحة</button>
+      <button class="kategori-filtre" type="button" data-kategori="hr"
+              data-ar="إسفنج HR" data-tr="HR Sünger" data-en="HR Foam" aria-pressed="false">إسفنج HR</button>
+      <button class="kategori-filtre" type="button" data-kategori="visco"
+              data-ar="إسفنج فيسكو" data-tr="Visco Sünger" data-en="Visco Foam" aria-pressed="false">إسفنج فيسكو</button>
+      <button class="kategori-filtre" type="button" data-kategori="uv"
+              data-ar="إسفنج U.V." data-tr="U.V. Sünger" data-en="U.V. Foam" aria-pressed="false">إسفنج U.V.</button>
+      <button class="kategori-filtre" type="button" data-kategori="yan"
+              data-ar="منتجات إضافية" data-tr="Yan Ürünler" data-en="Accessories" aria-pressed="false">منتجات إضافية</button>
+    </nav>
 
-    <div class="urun-karti">
-      <div class="urun-galeri">
-        <div class="galeri-kaydirma" role="group" aria-roledescription="carousel" aria-label="إسفنجة">
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="sunger-1.webp"
-                 alt="إسفنجة"
-                 data-ar-alt="إسفنجة"
-                 data-tr-alt="Sünger"
-                 data-en-alt="Sponge">
-          </div>
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="sunger-2.jpg"
-                 alt="إسفنجة"
-                 data-ar-alt="إسفنجة"
-                 data-tr-alt="Sünger"
-                 data-en-alt="Sponge">
-          </div>
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="sunger-3.webp"
-                 alt="إسفنجة"
-                 data-ar-alt="إسفنجة"
-                 data-tr-alt="Sünger"
-                 data-en-alt="Sponge">
-          </div>
-          <div class="galeri-kare" role="group" aria-roledescription="slide">
-            <img src="sunger-4.jpg"
-                 alt="إسفنجة"
-                 data-ar-alt="إسفنجة"
-                 data-tr-alt="Sünger"
-                 data-en-alt="Sponge">
-          </div>
-        </div>
-        <div class="galeri-kontroller" hidden></div>
-      </div>
-      <div class="urun-bilgi">
-        <h2 data-ar="إسفنجة" data-tr="Sünger" data-en="Sponge">إسفنجة</h2>
-        <p data-ar="بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة." data-tr="Doğrudan üreticiden, toptan ürün temin edebiliyoruz." data-en="We can source products wholesale directly from the manufacturer.">بإمكاننا الحصول على المنتجات بالجملة مباشرة من الشركة المصنعة.</p>
-      </div>
-    </div>
-
+    <div class="urunler" id="urunler" role="list"></div>
+    
   </section>
 
   <!-- İletişim -->
@@ -400,17 +334,134 @@
       const varsayilanDil = 'ar';
       const rtlDiller = ['ar', 'he', 'fa', 'ur'];  // Sağdan sola diller
       const butonlar = document.querySelectorAll('.dil-secici button');
-      const galeriler = document.querySelectorAll('.galeri-kaydirma');
-      const galeriEtiketleri = {
-        ar: { carousel: 'معرض الصور', slide: 'الصورة', previous: 'الصورة السابقة', next: 'الصورة التالية' },
-        tr: { carousel: 'Görsel galerisi', slide: 'Görsel', previous: 'Önceki görsel', next: 'Sonraki görsel' },
-        en: { carousel: 'Image gallery', slide: 'Image', previous: 'Previous image', next: 'Next image' }
-      };
       const basliklar = {
         ar: 'منتجاتنا',
         tr: 'Ürünlerimiz',
         en: 'Our Products'
       };
+      const kategoriFiltreEtiketleri = {
+        ar: 'فئات المنتجات',
+        tr: 'Ürün kategorileri',
+        en: 'Product categories'
+      };
+      const kategoriAdlari = {
+        standart: { ar: 'المنتجات القياسية', tr: 'Standart Ürünler', en: 'Standard Products' },
+        konfor: { ar: 'الراحة', tr: 'Konfor', en: 'Comfort' },
+        hr: { ar: 'إسفنج HR', tr: 'HR Sünger', en: 'HR Foam' },
+        visco: { ar: 'إسفنج فيسكو', tr: 'Visco Sünger', en: 'Visco Foam' },
+        uv: { ar: 'إسفنج U.V.', tr: 'U.V. Sünger', en: 'U.V. Foam' },
+        yan: { ar: 'منتجات إضافية', tr: 'Yan Ürünler', en: 'Accessories' }
+      };
+      const urunVerileri = [
+        { kategori: 'standart', isaret: '14', image: 'assets/products/14-beyaz.jpg', ad: { ar: 'إسفنج أبيض 14', tr: '14 Beyaz Sünger', en: '14 White Foam' } },
+        { kategori: 'standart', isaret: '17', image: 'assets/products/17-eko.jpg', ad: { ar: 'إسفنج اقتصادي 17', tr: '17 Eko Sünger', en: '17 Eco Foam' } },
+        { kategori: 'standart', isaret: '22', image: 'assets/products/22-gri.jpg', ad: { ar: 'إسفنج رمادي 22', tr: '22 Gri Sünger', en: '22 Gray Foam' } },
+        { kategori: 'standart', isaret: '26', image: 'assets/products/26-gri.jpeg', ad: { ar: 'إسفنج رمادي 26', tr: '26 Gri Sünger', en: '26 Gray Foam' } },
+        { kategori: 'standart', isaret: '28', image: 'assets/products/28-sert.jpg', ad: { ar: 'إسفنج صلب 28', tr: '28 Sert Sünger', en: '28 Firm Foam' } },
+        { kategori: 'standart', isaret: '32', image: 'assets/products/32-sert.jpg', ad: { ar: 'إسفنج صلب 32', tr: '32 Sert Sünger', en: '32 Firm Foam' } },
+        { kategori: 'standart', isaret: '35', image: 'assets/products/35-sert.jpg', ad: { ar: 'إسفنج صلب 35', tr: '35 Sert Sünger', en: '35 Firm Foam' } },
+        { kategori: 'konfor', isaret: '25', image: 'assets/products/25-hyper.jpg', ad: { ar: 'إسفنج هايبر 25', tr: '25 Hyper Sünger', en: '25 Hyper Foam' } },
+        { kategori: 'konfor', isaret: '24', image: 'assets/products/24-kustuyu.jpg', ad: { ar: 'إسفنج ريش 24', tr: '24 Kuştüyü Sünger', en: '24 Feather-Touch Foam' } },
+        { kategori: 'konfor', isaret: '28', image: 'assets/products/28-yumusak.jpg', ad: { ar: 'إسفنج ناعم 28', tr: '28 Yumuşak Sünger', en: '28 Soft Foam' } },
+        { kategori: 'konfor', isaret: '30', image: 'assets/products/30-hyper.jpg', ad: { ar: 'إسفنج هايبر 30', tr: '30 Hyper Sünger', en: '30 Hyper Foam' } },
+        { kategori: 'konfor', isaret: '32', image: 'assets/products/32-yumusak.jpg', ad: { ar: 'إسفنج ناعم 32', tr: '32 Yumuşak Sünger', en: '32 Soft Foam' } },
+        { kategori: 'konfor', isaret: '35', image: 'assets/products/35-soft.jpg', ad: { ar: 'إسفنج سوفت 35', tr: '35 Soft Sünger', en: '35 Soft Foam' } },
+        { kategori: 'konfor', isaret: '35', image: 'assets/products/35-yumusak.jpg', ad: { ar: 'إسفنج ناعم 35', tr: '35 Yumuşak Sünger', en: '35 Soft Foam' } },
+        { kategori: 'konfor', isaret: '30', image: 'assets/products/30-flexi.jpg', ad: { ar: 'إسفنج فليكسي 30', tr: '30 Flexi Sünger', en: '30 Flexi Foam' } },
+        { kategori: 'konfor', isaret: '32', image: 'assets/products/32-multiflexi.jpg', ad: { ar: 'إسفنج مالتي فليكسي 32', tr: '32 Multiflexi Sünger', en: '32 Multiflexi Foam' } },
+        { kategori: 'hr', isaret: '35', image: 'assets/products/35-hr-soft.jpg', ad: { ar: 'إسفنج HR سوفت 35', tr: '35 HR Soft Sünger', en: '35 HR Soft Foam' } },
+        { kategori: 'hr', isaret: '35', image: 'assets/products/35-hr-yumusak.jpg', ad: { ar: 'إسفنج HR ناعم 35', tr: '35 HR Yumuşak Sünger', en: '35 HR Soft Foam' } },
+        { kategori: 'hr', isaret: '34', image: 'assets/products/34-fr.jpg', ad: { ar: 'إسفنج مقاوم للحريق 34 FR', tr: '34 FR Sünger', en: '34 FR Foam' } },
+        { kategori: 'visco', isaret: '50', image: 'assets/products/50-visco.jpg', ad: { ar: 'إسفنج فيسكو 50', tr: '50 Visco Sünger', en: '50 Visco Foam' } },
+        { kategori: 'visco', isaret: '60', image: 'assets/products/60-visco.jpg', ad: { ar: 'إسفنج فيسكو 60', tr: '60 Visco Sünger', en: '60 Visco Foam' } },
+        { kategori: 'uv', isaret: '22', image: 'assets/products/22-uv.jpg', ad: { ar: 'إسفنج U.V. 22', tr: '22 U.V. Sünger', en: '22 U.V. Foam' } },
+        { kategori: 'uv', isaret: '26', image: 'assets/products/26-uv.jpg', ad: { ar: 'إسفنج U.V. 26', tr: '26 U.V. Sünger', en: '26 U.V. Foam' } },
+        { kategori: 'yan', isaret: 'ELY', image: 'assets/products/boncuk-elyaf.jpg', ad: { ar: 'ألياف كروية', tr: 'Boncuk Elyaf', en: 'Ball Fiber' } },
+        { kategori: 'yan', isaret: 'BDX', image: 'assets/products/bondeks.jpg', ad: { ar: 'بوندكس', tr: 'Bondeks', en: 'Bondex' } },
+        { kategori: 'yan', isaret: 'KPK', image: 'assets/products/kapak.jpg', ad: { ar: 'غطاء', tr: 'Kapak', en: 'Cover' } },
+        { kategori: 'yan', isaret: 'KG', image: 'assets/products/kiloluk.jpg', ad: { ar: 'بالكيلو', tr: 'Kiloluk', en: 'By Weight' } },
+        { kategori: 'yan', isaret: 'KRP', image: 'assets/products/kirpinti.jpg', ad: { ar: 'فتات الإسفنج', tr: 'Kırpıntı', en: 'Foam Scrap' } },
+        { kategori: 'yan', isaret: 'TKZ', image: 'assets/products/takoz.jpg', ad: { ar: 'كتلة إسفنجية', tr: 'Takoz', en: 'Foam Block' } }
+      ];
+      const urunIzgarasi = document.querySelector('#urunler');
+      const filtreButonlari = document.querySelectorAll('.kategori-filtre');
+      const sayac = document.querySelector('#urun-sayisi');
+      let seciliKategori = 'all';
+
+      function urunleriOlustur() {
+        const kartlar = urunVerileri.map(urun => {
+          const kart = document.createElement('article');
+          kart.className = 'urun-karti';
+          kart.dataset.kategori = urun.kategori;
+          kart.setAttribute('role', 'listitem');
+
+          const isaret = document.createElement('span');
+          isaret.className = 'urun-isaret';
+          isaret.textContent = urun.isaret;
+
+          const gorsel = document.createElement('img');
+          gorsel.className = 'urun-gorsel';
+          gorsel.src = urun.image;
+          gorsel.alt = urun.ad[varsayilanDil];
+          gorsel.loading = 'lazy';
+          gorsel.decoding = 'async';
+          Object.entries(urun.ad).forEach(([dil, ad]) => {
+            gorsel.setAttribute(`data-${dil}-alt`, ad);
+          });
+
+          const bilgi = document.createElement('div');
+          bilgi.className = 'urun-bilgi';
+
+          const baslik = document.createElement('h3');
+          Object.entries(urun.ad).forEach(([dil, ad]) => {
+            baslik.setAttribute(`data-${dil}`, ad);
+          });
+          baslik.textContent = urun.ad[varsayilanDil];
+
+          const kategori = document.createElement('span');
+          kategori.className = 'urun-kategori-etiket';
+          Object.entries(kategoriAdlari[urun.kategori]).forEach(([dil, ad]) => {
+            kategori.setAttribute(`data-${dil}`, ad);
+          });
+          kategori.textContent = kategoriAdlari[urun.kategori][varsayilanDil];
+
+          bilgi.append(baslik, kategori);
+          kart.append(gorsel, isaret, bilgi);
+          return kart;
+        });
+        urunIzgarasi.append(...kartlar);
+      }
+
+      function filtreyiUygula(dil) {
+        let gorunenUrunSayisi = 0;
+        urunIzgarasi.querySelectorAll('.urun-karti').forEach(kart => {
+          const gorunur = seciliKategori === 'all' || kart.dataset.kategori === seciliKategori;
+          kart.hidden = !gorunur;
+          if (gorunur) gorunenUrunSayisi += 1;
+        });
+        const sayacMetinleri = {
+          ar: gorunenUrunSayisi === 1 ? 'منتج واحد' :
+            gorunenUrunSayisi === 2 ? 'منتجان' :
+            gorunenUrunSayisi <= 10 ? `${gorunenUrunSayisi} منتجات` :
+            `${gorunenUrunSayisi} منتجًا`,
+          tr: `${gorunenUrunSayisi} ürün`,
+          en: `${gorunenUrunSayisi} products`
+        };
+        sayac.textContent = sayacMetinleri[dil];
+        filtreButonlari.forEach(btn => {
+          const aktif = btn.dataset.kategori === seciliKategori;
+          btn.classList.toggle('aktif', aktif);
+          btn.setAttribute('aria-pressed', String(aktif));
+        });
+      }
+
+      urunleriOlustur();
+      filtreButonlari.forEach(btn => {
+        btn.addEventListener('click', () => {
+          seciliKategori = btn.dataset.kategori;
+          filtreyiUygula(document.documentElement.lang);
+        });
+      });
 
       function diliOku() {
         try {
@@ -438,30 +489,12 @@
           if (metin) el.textContent = metin;
         });
 
-        // 2. Görsellerin alternatif metinlerini güncelle
         document.querySelectorAll('img[data-ar-alt]').forEach(img => {
           const alternatifMetin = img.getAttribute('data-' + dil + '-alt');
           if (alternatifMetin !== null) img.alt = alternatifMetin;
         });
 
-        galeriler.forEach(galeri => {
-          const kart = galeri.closest('.urun-karti');
-          const kontroller = galeri.nextElementSibling;
-          const urunAdi = kart.querySelector('.urun-bilgi h2').textContent;
-          galeri.setAttribute('aria-label', `${galeriEtiketleri[dil].carousel}: ${urunAdi}`);
-          galeri.querySelectorAll('.galeri-kare').forEach((kare, index) => {
-            kare.setAttribute('aria-label', `${galeriEtiketleri[dil].slide} ${index + 1} / ${galeri.children.length}`);
-          });
-          kontroller.querySelectorAll('.galeri-onceki').forEach(btn => {
-            btn.setAttribute('aria-label', galeriEtiketleri[dil].previous);
-          });
-          kontroller.querySelectorAll('.galeri-sonraki').forEach(btn => {
-            btn.setAttribute('aria-label', galeriEtiketleri[dil].next);
-          });
-          kontroller.querySelectorAll('.galeri-nokta').forEach((btn, index) => {
-            btn.setAttribute('aria-label', `${galeriEtiketleri[dil].slide} ${index + 1} / ${galeri.children.length}`);
-          });
-        });
+        filtreyiUygula(dil);
 
         // 3. Aktif butonu işaretle
         butonlar.forEach(b => {
@@ -471,6 +504,7 @@
         // 4. HTML lang ve dir özelliklerini güncelle (RTL/LTR)
         document.documentElement.lang = dil;
         document.documentElement.dir = rtlDiller.includes(dil) ? 'rtl' : 'ltr';
+        document.querySelector('#kategori-filtreleri').setAttribute('aria-label', kategoriFiltreEtiketleri[dil]);
 
         // 5. Sayfa başlığını güncelle
         document.title = basliklar[dil] || basliklar[varsayilanDil];
@@ -482,67 +516,6 @@
       // Butonlara tıklama olayı ekle
       butonlar.forEach(btn => {
         btn.addEventListener('click', () => dilDegistir(btn.dataset.dil));
-      });
-
-      galeriler.forEach(galeri => {
-        const kareler = Array.from(galeri.querySelectorAll('.galeri-kare'));
-        const kontroller = galeri.nextElementSibling;
-        if (kareler.length < 2) return;
-
-        kontroller.hidden = false;
-        const noktalar = document.createElement('div');
-        noktalar.className = 'galeri-noktalar';
-        const gosterge = document.createElement('span');
-        gosterge.className = 'galeri-gosterge';
-        gosterge.setAttribute('aria-hidden', 'true');
-        const onceki = document.createElement('button');
-        onceki.type = 'button';
-        onceki.className = 'galeri-ok galeri-onceki';
-        onceki.textContent = '‹';
-        const sonraki = document.createElement('button');
-        sonraki.type = 'button';
-        sonraki.className = 'galeri-ok galeri-sonraki';
-        sonraki.textContent = '›';
-        kontroller.append(onceki, sonraki, gosterge, noktalar);
-
-        kareler.forEach((kare, index) => {
-          const nokta = document.createElement('button');
-          nokta.type = 'button';
-          nokta.className = 'galeri-nokta';
-          nokta.setAttribute('aria-current', String(index === 0));
-          nokta.addEventListener('click', () => {
-            galeri.scrollTo({ left: index * galeri.clientWidth, behavior: 'smooth' });
-          });
-          noktalar.append(nokta);
-        });
-
-        function gostergeyiGuncelle() {
-          const aktifKare = Math.min(
-            kareler.length - 1,
-            Math.round(galeri.scrollLeft / galeri.clientWidth)
-          );
-          gosterge.textContent = `${aktifKare + 1} / ${kareler.length}`;
-          Array.from(noktalar.children).forEach((nokta, index) => {
-            nokta.setAttribute('aria-current', String(index === aktifKare));
-          });
-        }
-
-        onceki.addEventListener('click', () => {
-          const aktifKare = Math.round(galeri.scrollLeft / galeri.clientWidth);
-          galeri.scrollTo({
-            left: Math.max(0, aktifKare - 1) * galeri.clientWidth,
-            behavior: 'smooth'
-          });
-        });
-        sonraki.addEventListener('click', () => {
-          const aktifKare = Math.round(galeri.scrollLeft / galeri.clientWidth);
-          galeri.scrollTo({
-            left: Math.min(kareler.length - 1, aktifKare + 1) * galeri.clientWidth,
-            behavior: 'smooth'
-          });
-        });
-        galeri.addEventListener('scroll', gostergeyiGuncelle, { passive: true });
-        gostergeyiGuncelle();
       });
 
       // Sayfa açıldığında kayıtlı dili uygula
