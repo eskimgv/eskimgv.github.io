@@ -205,7 +205,34 @@
     html[dir="ltr"] .urun-bilgi { direction: ltr; }
     .urun-bilgi h3 { font-size: 1.05rem; font-weight: 600; }
     .urun-kategori-etiket { display: inline-block; margin-top: 8px; color: var(--text-muted); font-size: 0.78rem; }
-    
+    .urun-ozellikleri { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 10px; }
+    .urun-ozellikleri summary {
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+    .urun-ozellikleri summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .urun-ozellikler-tasiyici { overflow-x: auto; margin-top: 10px; }
+    .urun-ozellikler-tasiyici table {
+      width: 100%;
+      min-width: 540px;
+      border-collapse: collapse;
+      direction: ltr;
+      text-align: left;
+      font-size: 0.78rem;
+    }
+    .urun-ozellikler-tasiyici th,
+    .urun-ozellikler-tasiyici td {
+      border: 1px solid var(--border);
+      padding: 7px 8px;
+      vertical-align: top;
+    }
+    .urun-ozellikler-tasiyici th { background: var(--surface-hover); color: var(--text); }
+    .urun-ozellikler-tasiyici td { color: var(--text-muted); }
 
     @media (max-width: 900px) {
       .urunler { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -365,30 +392,83 @@
         uv: { ar: 'إسفنج U.V.', tr: 'U.V. Sünger', en: 'U.V. Foam' },
         yan: { ar: 'منتجات إضافية', tr: 'Yan Ürünler', en: 'Accessories' }
       };
+      const ozellikMetinleri = {
+        goster: { ar: 'عرض المواصفات الفنية', tr: 'Teknik özellikleri göster', en: 'Show technical specifications' },
+        fizikselOzellikler: { ar: 'الخصائص الفيزيائية', tr: 'Fiziksel Özellikler', en: 'Physical Properties' },
+        birim: { ar: 'الوحدة', tr: 'Birim', en: 'Unit' },
+        standartNormlar: { ar: 'المعايير القياسية', tr: 'Standart Normlar', en: 'Test Standards' },
+        standartDegerler: { ar: 'القيم القياسية', tr: 'Standart Değerler', en: 'Standard Values' }
+      };
       const urunVerileri = [
-        { kategori: 'standart', isaret: '14', image: 'assets/products/14-beyaz.jpg', ad: { ar: 'إسفنج أبيض 14', tr: '14 Beyaz Sünger', en: '14 White Foam' } },
-        { kategori: 'standart', isaret: '17', image: 'assets/products/17-eko.jpg', ad: { ar: 'إسفنج اقتصادي 17', tr: '17 Eko Sünger', en: '17 Eco Foam' } },
-        { kategori: 'standart', isaret: '22', image: 'assets/products/22-gri.jpg', ad: { ar: 'إسفنج رمادي 22', tr: '22 Gri Sünger', en: '22 Gray Foam' } },
-        { kategori: 'standart', isaret: '26', image: 'assets/products/26-gri.jpeg', ad: { ar: 'إسفنج رمادي 26', tr: '26 Gri Sünger', en: '26 Gray Foam' } },
-        { kategori: 'standart', isaret: '28', image: 'assets/products/28-sert.jpg', ad: { ar: 'إسفنج صلب 28', tr: '28 Sert Sünger', en: '28 Firm Foam' } },
-        { kategori: 'standart', isaret: '32', image: 'assets/products/32-sert.jpg', ad: { ar: 'إسفنج صلب 32', tr: '32 Sert Sünger', en: '32 Firm Foam' } },
-        { kategori: 'standart', isaret: '35', image: 'assets/products/35-sert.jpg', ad: { ar: 'إسفنج صلب 35', tr: '35 Sert Sünger', en: '35 Firm Foam' } },
-        { kategori: 'konfor', isaret: '25', image: 'assets/products/25-hyper.jpg', ad: { ar: 'إسفنج هايبر 25', tr: '25 Hyper Sünger', en: '25 Hyper Foam' } },
-        { kategori: 'konfor', isaret: '24', image: 'assets/products/24-kustuyu.jpg', ad: { ar: 'إسفنج ريش 24', tr: '24 Kuştüyü Sünger', en: '24 Feather-Touch Foam' } },
-        { kategori: 'konfor', isaret: '28', image: 'assets/products/28-yumusak.jpg', ad: { ar: 'إسفنج ناعم 28', tr: '28 Yumuşak Sünger', en: '28 Soft Foam' } },
-        { kategori: 'konfor', isaret: '30', image: 'assets/products/30-hyper.jpg', ad: { ar: 'إسفنج هايبر 30', tr: '30 Hyper Sünger', en: '30 Hyper Foam' } },
-        { kategori: 'konfor', isaret: '32', image: 'assets/products/32-yumusak.jpg', ad: { ar: 'إسفنج ناعم 32', tr: '32 Yumuşak Sünger', en: '32 Soft Foam' } },
-        { kategori: 'konfor', isaret: '35', image: 'assets/products/35-soft.jpg', ad: { ar: 'إسفنج سوفت 35', tr: '35 Soft Sünger', en: '35 Soft Foam' } },
-        { kategori: 'konfor', isaret: '35', image: 'assets/products/35-yumusak.jpg', ad: { ar: 'إسفنج ناعم 35', tr: '35 Yumuşak Sünger', en: '35 Soft Foam' } },
-        { kategori: 'konfor', isaret: '30', image: 'assets/products/30-flexi.jpg', ad: { ar: 'إسفنج فليكسي 30', tr: '30 Flexi Sünger', en: '30 Flexi Foam' } },
-        { kategori: 'konfor', isaret: '32', image: 'assets/products/32-multiflexi.jpg', ad: { ar: 'إسفنج مالتي فليكسي 32', tr: '32 Multiflexi Sünger', en: '32 Multiflexi Foam' } },
-        { kategori: 'hr', isaret: '35', image: 'assets/products/35-hr-soft.jpg', ad: { ar: 'إسفنج HR سوفت 35', tr: '35 HR Soft Sünger', en: '35 HR Soft Foam' } },
-        { kategori: 'hr', isaret: '35', image: 'assets/products/35-hr-yumusak.jpg', ad: { ar: 'إسفنج HR ناعم 35', tr: '35 HR Yumuşak Sünger', en: '35 HR Soft Foam' } },
-        { kategori: 'hr', isaret: '34', image: 'assets/products/34-fr.jpg', ad: { ar: 'إسفنج مقاوم للحريق 34 FR', tr: '34 FR Sünger', en: '34 FR Foam' } },
-        { kategori: 'visco', isaret: '50', image: 'assets/products/50-visco.jpg', ad: { ar: 'إسفنج فيسكو 50', tr: '50 Visco Sünger', en: '50 Visco Foam' } },
-        { kategori: 'visco', isaret: '60', image: 'assets/products/60-visco.jpg', ad: { ar: 'إسفنج فيسكو 60', tr: '60 Visco Sünger', en: '60 Visco Foam' } },
-        { kategori: 'uv', isaret: '22', image: 'assets/products/22-uv.jpg', ad: { ar: 'إسفنج U.V. 22', tr: '22 U.V. Sünger', en: '22 U.V. Foam' } },
-        { kategori: 'uv', isaret: '26', image: 'assets/products/26-uv.jpg', ad: { ar: 'إسفنج U.V. 26', tr: '26 U.V. Sünger', en: '26 U.V. Foam' } },
+        { kategori: 'standart', isaret: '14', image: 'assets/products/14-beyaz.jpg', ad: { ar: 'إسفنج أبيض 14', tr: '14 Beyaz Sünger', en: '14 White Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '14 ± 2'], ['Sertlik', 'N', 'ISO 2439 (F%40)', '95 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,07≥'], ['Kopma Uzaması', '%', 'ISO 1798', '160 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 3'], ['Elastikiyet', '%', 'ASTM D 3574', '35 ≥'], ['Deformasyon', '%', 'ISO 1856', '8 ≤']
+        ] },
+        { kategori: 'standart', isaret: '17', image: 'assets/products/17-eko.jpg', ad: { ar: 'إسفنج اقتصادي 17', tr: '17 Eko Sünger', en: '17 Eco Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '17 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '125 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.06 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '120 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '35 ≥'], ['Deformasyon', '%', 'ISO 1856', '8 ≤']
+        ] },
+        { kategori: 'standart', isaret: '22', image: 'assets/products/22-gri.jpg', ad: { ar: 'إسفنج رمادي 22', tr: '22 Gri Sünger', en: '22 Gray Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '22 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '165±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '140 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '35 ≥'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '8 ≤']
+        ] },
+        { kategori: 'standart', isaret: '26', image: 'assets/products/26-gri.jpeg', ad: { ar: 'إسفنج رمادي 26', tr: '26 Gri Sünger', en: '26 Gray Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '26 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '210 ± %15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '130 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,6'], ['Elastikiyet', '%', 'ASTM D 3574', '40 ≥'], ['Deformasyon', '%', 'ISO 1856', '7 ≤']
+        ] },
+        { kategori: 'standart', isaret: '28', image: 'assets/products/28-sert.jpg', ad: { ar: 'إسفنج صلب 28', tr: '28 Sert Sünger', en: '28 Firm Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '28 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '215 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.09 ≥'], ['Kopma Uzaması', '%', 'ASTM D 3574', '130 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '40 ≥'], ['Deformasyon', '%', 'ISO 1856', '7 ≤']
+        ] },
+        { kategori: 'standart', isaret: '32', image: 'assets/products/32-sert.jpg', ad: { ar: 'إسفنج صلب 32', tr: '32 Sert Sünger', en: '32 Firm Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '32 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '220 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,09 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '140 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,8'], ['Elastikiyet', '%', 'ASTM D 3574', '40 ≥'], ['Deformasyon', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'standart', isaret: '35', image: 'assets/products/35-sert.jpg', ad: { ar: 'إسفنج صلب 35', tr: '35 Sert Sünger', en: '35 Firm Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '35 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '225 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,09 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '140 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '40 ≥'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '7 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '25', image: 'assets/products/25-hyper.jpg', ad: { ar: 'إسفنج هايبر 25', tr: '25 Hyper Sünger', en: '25 Hyper Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '25 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '75 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '200 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 3,5'], ['Elastikiyet', '%', 'ASTM D 3574', '50 ≥'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '5 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '24', image: 'assets/products/24-kustuyu.jpg', ad: { ar: 'إسفنج ريش 24', tr: '24 Kuştüyü Sünger', en: '24 Feather-Touch Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '24 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '75 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '230 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 3,2'], ['Elastikiyet', '%', 'ASTM D 3574', '50 ≥'], ['Deformasyon', '%', 'ISO 1856', '5 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '28', image: 'assets/products/28-yumusak.jpg', ad: { ar: 'إسفنج ناعم 28', tr: '28 Yumuşak Sünger', en: '28 Soft Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '28 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '170 ± %15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '200 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 3,0'], ['Elastikiyet', '%', 'ASTM D 3574', '50 ≥'], ['Deformasyon', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '30', image: 'assets/products/30-hyper.jpg', ad: { ar: 'إسفنج هايبر 30', tr: '30 Hyper Sünger', en: '30 Hyper Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '30 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '175 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '150 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '55 ≥'], ['Deformasyon', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '32', image: 'assets/products/32-yumusak.jpg', ad: { ar: 'إسفنج ناعم 32', tr: '32 Yumuşak Sünger', en: '32 Soft Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '32 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '220 ± %15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '≥ 200'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 3,0'], ['Elastikiyet', '%', 'ASTM D 3574', '50 ≥'], ['Deformasyon', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '35', image: 'assets/products/35-soft.jpg', ad: { ar: 'إسفنج سوفت 35', tr: '35 Soft Sünger', en: '35 Soft Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '35 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '115 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,09 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '200 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '55 ≥'], ['Deformasyon', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '35', image: 'assets/products/35-yumusak.jpg', ad: { ar: 'إسفنج ناعم 35', tr: '35 Yumuşak Sünger', en: '35 Soft Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '35 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '180 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,09 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '180 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 3,3'], ['Elastikiyet', '%', 'ASTM D 3574', '50 ≥'], ['Deformasyon', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '30', image: 'assets/products/30-flexi.jpg', ad: { ar: 'إسفنج فليكسي 30', tr: '30 Flexi Sünger', en: '30 Flexi Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '30 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '175 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0.08 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '200 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '50 ≥'], ['Deformasyon', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'konfor', isaret: '32', image: 'assets/products/32-multiflexi.jpg', ad: { ar: 'إسفنج مالتي فليكسي 32', tr: '32 Multiflexi Sünger', en: '32 Multiflexi Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '32 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '165 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,09 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '200 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 2,7'], ['Elastikiyet', '%', 'ASTM D 3574', '55 ≥'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '6 ≤']
+        ] },
+        { kategori: 'hr', isaret: '35', image: 'assets/products/35-hr-soft.jpg', ad: { ar: 'إسفنج HR سوفت 35', tr: '35 HR Soft Sünger', en: '35 HR Soft Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '22 ± 1'], ['Sertlik', 'N', 'ISO 2439 (%40)', '135±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,11±0,02'], ['Kopma Uzaması', '%', 'ASTM D 3574', '200±50'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '4,0 ± 0,5'], ['Elastikiyet', '%', 'ASTM D 3574', '45± 5'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '<8']
+        ] },
+        { kategori: 'hr', isaret: '35', image: 'assets/products/35-hr-yumusak.jpg', ad: { ar: 'إسفنج HR ناعم 35', tr: '35 HR Yumuşak Sünger', en: '35 HR Soft Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '22 ± 1'], ['Sertlik', 'N', 'ISO 2439 (%40)', '135±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,11±0,02'], ['Kopma Uzaması', '%', 'ASTM D 3574', '200±50'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '4,0 ± 0,5'], ['Elastikiyet', '%', 'ASTM D 3574', '45± 5'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '<8']
+        ] },
+        { kategori: 'hr', isaret: '34', image: 'assets/products/34-fr.jpg', ad: { ar: 'إسفنج مقاوم للحريق 34 FR', tr: '34 FR Sünger', en: '34 FR Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '34 ± 2'], ['Sertlik', 'N', 'ISO 2439 (%40)', '170 ±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,11 ≥'], ['Kopma Uzaması', '%', 'ISO 1798', '200 ≥'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '≥ 3'], ['Elastikiyet', '%', 'ASTM D 3574', '45 ≥'], ['Deformasyon', '%', 'ISO 1856', '6,5 ≤']
+        ] },
+        { kategori: 'visco', isaret: '50', image: 'assets/products/50-visco.jpg', ad: { ar: 'إسفنج فيسكو 50', tr: '50 Visco Sünger', en: '50 Visco Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '22 ± 1'], ['Sertlik', 'N', 'ISO 2439 (%40)', '135±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,11±0,02'], ['Kopma Uzaması', '%', 'ASTM D 3574', '200±50'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '4,0 ± 0,5'], ['Elastikiyet', '%', 'ASTM D 3574', '45± 5'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '<8']
+        ] },
+        { kategori: 'visco', isaret: '60', image: 'assets/products/60-visco.jpg', ad: { ar: 'إسفنج فيسكو 60', tr: '60 Visco Sünger', en: '60 Visco Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '22 ± 1'], ['Sertlik', 'N', 'ISO 2439 (%40)', '135±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,11±0,02'], ['Kopma Uzaması', '%', 'ASTM D 3574', '200±50'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '4,0 ± 0,5'], ['Elastikiyet', '%', 'ASTM D 3574', '45± 5'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '<8']
+        ] },
+        { kategori: 'uv', isaret: '22', image: 'assets/products/22-uv.jpg', ad: { ar: 'إسفنج U.V. 22', tr: '22 U.V. Sünger', en: '22 U.V. Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '22 ± 1'], ['Sertlik', 'N', 'ISO 2439 (%40)', '135±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,11±0,02'], ['Kopma Uzaması', '%', 'ASTM D 3574', '200±50'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '4,0 ± 0,5'], ['Elastikiyet', '%', 'ASTM D 3574', '45± 5'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '<8']
+        ] },
+        { kategori: 'uv', isaret: '26', image: 'assets/products/26-uv.jpg', ad: { ar: 'إسفنج U.V. 26', tr: '26 U.V. Sünger', en: '26 U.V. Foam' }, ozellikler: [
+          ['Yoğunluk', 'Kg/m³', 'ISO 845', '22 ± 1'], ['Sertlik', 'N', 'ISO 2439 (%40)', '135±%15'], ['Kopma Direnci', 'N/mm²', 'ISO 1798', '0,11±0,02'], ['Kopma Uzaması', '%', 'ASTM D 3574', '200±50'], ['Yırtılma Direnci', 'N/Cm', 'ASTM D 3574', '4,0 ± 0,5'], ['Elastikiyet', '%', 'ASTM D 3574', '45± 5'], ['Basınç Altında Ezilme*', '%', 'ISO 1856', '<8']
+        ] },
         { kategori: 'yan', isaret: 'ELY', image: 'assets/products/boncuk-elyaf.jpg', ad: { ar: 'ألياف كروية', tr: 'Boncuk Elyaf', en: 'Ball Fiber' } },
         { kategori: 'yan', isaret: 'BDX', image: 'assets/products/bondeks.jpg', ad: { ar: 'بوندكس', tr: 'Bondeks', en: 'Bondex' } },
         { kategori: 'yan', isaret: 'KPK', image: 'assets/products/kapak.jpg', ad: { ar: 'غطاء', tr: 'Kapak', en: 'Cover' } },
@@ -439,6 +519,53 @@
           kategori.textContent = kategoriAdlari[urun.kategori][varsayilanDil];
 
           bilgi.append(baslik, kategori);
+          if (urun.ozellikler) {
+            const detaylar = document.createElement('details');
+            detaylar.className = 'urun-ozellikleri';
+
+            const ozet = document.createElement('summary');
+            Object.entries(ozellikMetinleri.goster).forEach(([dil, metin]) => {
+              ozet.setAttribute(`data-${dil}`, metin);
+            });
+            ozet.textContent = ozellikMetinleri.goster[varsayilanDil];
+
+            const tasiyici = document.createElement('div');
+            tasiyici.className = 'urun-ozellikler-tasiyici';
+            const tablo = document.createElement('table');
+            const baslikSatiri = document.createElement('tr');
+            [
+              ozellikMetinleri.fizikselOzellikler,
+              ozellikMetinleri.birim,
+              ozellikMetinleri.standartNormlar,
+              ozellikMetinleri.standartDegerler
+            ].forEach(metinler => {
+              const hucre = document.createElement('th');
+              hucre.scope = 'col';
+              Object.entries(metinler).forEach(([dil, metin]) => {
+                hucre.setAttribute(`data-${dil}`, metin);
+              });
+              hucre.textContent = metinler[varsayilanDil];
+              baslikSatiri.append(hucre);
+            });
+
+            const baslikBolumu = document.createElement('thead');
+            baslikBolumu.append(baslikSatiri);
+            const govde = document.createElement('tbody');
+            urun.ozellikler.forEach(satir => {
+              const tabloSatiri = document.createElement('tr');
+              satir.forEach(deger => {
+                const hucre = document.createElement('td');
+                hucre.textContent = deger;
+                tabloSatiri.append(hucre);
+              });
+              govde.append(tabloSatiri);
+            });
+
+            tablo.append(baslikBolumu, govde);
+            tasiyici.append(tablo);
+            detaylar.append(ozet, tasiyici);
+            bilgi.append(detaylar);
+          }
           kart.append(gorsel, isaret, bilgi);
           return kart;
         });
